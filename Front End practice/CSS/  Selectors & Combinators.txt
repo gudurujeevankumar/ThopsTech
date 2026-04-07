@@ -1,0 +1,116 @@
+1. Style All Paragraphs
+Use the type selector p to:
+Set a common font-family and line-height
+Change the color
+Add margin-bottom for spacing
+
+2. Style Elements by Class
+Create multiple elements with the same class:
+Use .highlight to change background-color
+Add padding and border
+Apply bold text
+
+3. Style an ID-Specific Section
+Create a unique section with an ID:
+Use #main-content to apply custom font, font-size, and color
+Add border and padding
+Use text-align: center
+
+4. Style Links Inside a Footer
+Use descendant combinator:
+footer a to style all links in the footer
+Remove underline, change color, and add hover effect
+Set font-weight to bold
+
+5. Target Direct Children Only
+Use child combinator >:
+nav > ul to style the top-level list
+Remove default padding and margin
+Apply background and spacing
+
+6. Style Sibling Elements
+Use adjacent sibling selector +:
+Style the first paragraph after each heading
+Add margin-top, font-style, and different color
+
+7. Style Multiple Selectors
+Use group selectors:
+h1, h2, h3 to apply same font and spacing
+Apply a shared letter-spacing
+Set color scheme for consistency
+
+8. Style Input Fields by Attribute
+Use attribute selectors:
+[type="text"] to style text inputs
+Add border, padding, and background color
+Use font-size for readability
+
+9. Hover Effect on Navigation
+Use a:hover:
+Change text color
+Add underline
+Use transition for smooth effect
+
+10. Style Nested Elements
+Use section article p:
+Change font-size, line-height, and text-align
+Highlight nested structure visually
+
+11. Style Only Last Item
+Use li:last-child:
+Add different background
+Round bottom corners
+Add padding or remove bottom border
+
+12. Style Only First Paragraph
+Use p:first-of-type:
+Make text bold
+Add top margin
+Increase font-size
+
+13. Style Even Rows in Table
+Use tr:nth-child(even):
+Change background color
+Adjust font color
+Add hover effect if needed
+
+14. Style Placeholder Text
+Use input::placeholder:
+Change color and font-style
+Add padding for spacing
+Use lighter tone for accessibility
+
+15. Style Paragraphs Only Inside Articles
+Use article p:
+Adjust font-size, color, and spacing
+Align text and add indent
+
+16. Style First Letter of a Paragraph
+Use p::first-letter:
+Enlarge font-size
+Add font-weight: bold
+Use a different color
+
+17. Style First Line of Paragraph
+Use p::first-line:
+Change font-variant to small-caps
+Set different color
+Adjust letter-spacing
+
+18. Use General Sibling Selector
+Use h2 ~ p:
+Apply styles to all paragraphs following a subheading
+Add font-style: italic
+Set a lighter font color
+
+19. Style Forms Inside a Section
+Use section form:
+Style all form fields uniformly
+Apply consistent margin, padding, and font
+
+20. Style Specific Link States
+Use a:visited and a:active:
+Change color for visited links
+Apply different color while clicking
+Use text-decoration for visual change
+

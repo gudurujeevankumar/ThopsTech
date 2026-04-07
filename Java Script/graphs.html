@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Data Visualization</title>
+    <style>
+        body { font-family: sans-serif; display: flex; gap: 50px; padding: 50px; background: #f4f7f6; }
+        
+        /* --- PIE CHART STYLE --- */
+        .pie-container { text-align: center; }
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            /* Uses conic-gradient: color start% end% */
+            background: conic-gradient(
+                #4CAF50 0% 70%, 
+                #2196F3 70% 90%, 
+                #FFC107 90% 100%
+            );
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        /* --- BAR GRAPH STYLE --- */
+        .bar-graph {
+            display: flex;
+            align-items: flex-end;
+            height: 200px;
+            width: 300px;
+            gap: 15px;
+            padding: 10px;
+            border-bottom: 2px solid #333;
+            border-left: 2px solid #333;
+        }
+        .bar {
+            flex: 1;
+            background: #2196F3;
+            /* Height is driven by the CSS variable passed in HTML */
+            height: var(--percent);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .bar:hover { transform: scaleX(1.1); background: #1976D2; }
+        .bar::after {
+            content: attr(data-value); /* Displays the percentage text */
+            position: absolute;
+            top: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .label { margin-top: 10px; font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="pie-container">
+        <div class="pie-chart"></div>
+        <div class="label">Service Distribution</div>
+        <small>Green: 70% | Blue: 20% | Gold: 10%</small>
+    </div>
+
+    <div>
+        <div class="bar-graph">
+            <div class="bar" style="--percent: 40%;" data-value="40%"></div>
+            <div class="bar" style="--percent: 85%;" data-value="85%"></div>
+            <div class="bar" style="--percent: 60%;" data-value="60%"></div>
+            <div class="bar" style="--percent: 95%;" data-value="95%"></div>
+        </div>
+        <div class="label" style="text-align: center;">Monthly Uptime</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRS Professional Guide | Industry Standards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafaf9; /* Stone 50 */
+            color: #1c1917; /* Stone 900 */
+        }
+
+        /* Chart Container Standards */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 300px;
+            max-height: 400px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar for inner content */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f5f5f4;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background-color: #d6d3d1;
+            border-radius: 20px;
+        }
+
+        /* Interactive Element Styles */
+        .nav-item.active {
+            background-color: #e7e5e4; /* Stone 200 */
+            border-left: 4px solid #ea580c; /* Orange 600 */
+            font-weight: 600;
+        }
+
+        .structure-card {
+            transition: all 0.3s ease;
+        }
+        .structure-card:hover {
+            transform: translateX(4px);
+            border-color: #a8a29e;
+        }
+
+        .btn-toggle {
+            transition: all 0.2s ease;
+        }
+        .btn-toggle.active {
+            background-color: #44403c; /* Stone 700 */
+            color: white;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals (Stone) with Earthy Accents (Terracotta, Sage, Slate) -->
+    <!-- Application Structure Plan: 
+         1. Hero/Intro: Contextualizes SRS as a contract.
+         2. Business Impact: Uses data visualization to justify the SRS effort (Cost of Change).
+         3. The Framework: Interactive explorer of the IEEE 830 structure.
+         4. Classification Engine: Comparison tool for Functional vs Non-Functional requirements.
+         5. Quality Audit: Radar chart to teach "Good" vs "Bad" writing habits.
+         Why this structure? It moves from "Why" (Business) to "What" (Structure) to "How" (Quality), mirroring the learning path of a professional engineer. 
+    -->
+    <!-- Visualization & Content Choices:
+         1. Line Chart: Cost of Change. Goal: Impact. Library: Chart.js.
+         2. Doughnut Chart: Error Origins. Goal: Inform. Library: Chart.js.
+         3. Radar Chart: Quality Attributes. Goal: Compare/Audit. Library: Chart.js.
+         4. Interactive Lists: Document Structure. Goal: Organize. Method: HTML/JS DOM manipulation.
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+</head>
+<body class="bg-stone-50 min-h-screen flex flex-col lg:flex-row overflow-hidden">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-full lg:w-64 bg-stone-100 border-r border-stone-200 flex-shrink-0 flex flex-col h-auto lg:h-screen z-20">
+        <div class="p-6 border-b border-stone-200">
+            <h1 class="text-2xl font-bold text-stone-800 tracking-tight">SRS<span class="text-orange-600">.Guide</span></h1>
+            <p class="text-xs text-stone-500 mt-1 uppercase tracking-wider">Professional Notes</p>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto py-4 px-2 space-y-1">
+            <button onclick="navigateTo('dashboard')" id="nav-dashboard" class="nav-item active w-full text-left px-4 py-3 rounded-md text-sm text-stone-700 hover:bg-stone-200 focus:outline-none">
+                Executive Overview
+            </button>
+            <button onclick="navigateTo('anatomy')" id="nav-anatomy" class="nav-item w-full text-left px-4 py-3 rounded-md text-sm text-stone-700 hover:bg-stone-200 focus:outline-none">
+                Standard Anatomy (IEEE)
+            </button>
+            <button onclick="navigateTo('types')" id="nav-types" class="nav-item w-full text-left px-4 py-3 rounded-md text-sm text-stone-700 hover:bg-stone-200 focus:outline-none">
+                Requirement Types
+            </button>
+            <button onclick="navigateTo('quality')" id="nav-quality" class="nav-item w-full text-left px-4 py-3 rounded-md text-sm text-stone-700 hover:bg-stone-200 focus:outline-none">
+                Quality Attributes
+            </button>
+        </nav>
+
+        <div class="p-4 border-t border-stone-200 bg-stone-100">
+            <div class="text-xs text-stone-400 font-medium">Ref: IEEE Std 830-1998</div>
+            <div class="text-xs text-stone-400 font-medium">Ref: ISO/IEC 29148</div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto h-screen relative scroll-smooth custom-scroll p-4 lg:p-8" id="main-container">
+        
+        <!-- SECTION 1: DASHBOARD (Executive Overview) -->
+        <section id="dashboard" class="fade-in max-w-7xl mx-auto space-y-8">
+            <header>
+                <h2 class="text-3xl font-bold text-stone-800">Software Requirements Specification</h2>
+                <p class="mt-2 text-stone-600 max-w-3xl text-lg leading-relaxed">
+                    The SRS is not just documentation; it is the <span class="font-semibold text-orange-600">binding agreement</span> between the business need and the engineering solution. It serves as the baseline for validation and verification.
+                </p>
+            </header>
+
+            <!-- Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Insight Card 1: Cost of Change -->
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-semibold text-stone-700">The Cost of Ambiguity</h3>
+                        <span class="px-2 py-1 bg-red-100 text-red-700 text-xs rounded-full font-bold">CRITICAL</span>
+                    </div>
+                    <p class="text-sm text-stone-500 mb-6">
+                        Why invest in a detailed SRS? The cost to fix an error increases exponentially as the project moves from requirements to maintenance.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-3 bg-stone-50 rounded-lg border border-stone-100 text-xs text-stone-600 italic">
+                        "Fixing a requirements error during testing costs 15x more than fixing it during the design phase." - Boehm's Curve
+                    </div>
+                </div>
+
+                <!-- Insight Card 2: Sources of Failure -->
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm flex flex-col">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-semibold text-stone-700">Origins of Project Defects</h3>
+                        <span class="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-bold">ANALYSIS</span>
+                    </div>
+                    <p class="text-sm text-stone-500 mb-6">
+                        Where do most software bugs originate? Surprisingly, logic errors in code are secondary to undefined or poorly defined requirements.
+                    </p>
+                    <div class="chart-container flex-1 flex items-center justify-center">
+                        <canvas id="bugChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Takeaways Footer -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                <div class="p-4 bg-stone-800 rounded-lg text-white">
+                    <div class="text-xs uppercase tracking-wider text-stone-400 mb-1">Purpose</div>
+                    <div class="font-bold">Communication Bridge</div>
+                    <p class="text-xs text-stone-400 mt-2">Connects domain experts (clients) with technical experts (devs).</p>
+                </div>
+                <div class="p-4 bg-stone-700 rounded-lg text-white">
+                    <div class="text-xs uppercase tracking-wider text-stone-400 mb-1">Contract</div>
+                    <div class="font-bold">Validation Baseline</div>
+                    <p class="text-xs text-stone-400 mt-2">Provides the standard against which the final product is tested.</p>
+                </div>
+                <div class="p-4 bg-stone-700 rounded-lg text-white">
+                    <div class="text-xs uppercase tracking-wider text-stone-400 mb-1">Scope</div>
+                    <div class="font-bold">Scope Control</div>
+                    <p class="text-xs text-stone-400 mt-2">Prevents feature creep by explicitly defining what is OUT of scope.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ANATOMY (IEEE Structure) -->
+        <section id="anatomy" class="hidden fade-in max-w-6xl mx-auto">
+            <header class="mb-8">
+                <h2 class="text-3xl font-bold text-stone-800">SRS Document Anatomy</h2>
+                <p class="mt-2 text-stone-600">
+                    Following industry standards (IEEE 830) ensures completeness. Click the sections below to understand the purpose of each component.
+                </p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Interactive Tree -->
+                <div class="lg:col-span-5 space-y-2" id="structure-list">
+                    <!-- JS will populate this -->
+                </div>
+
+                <!-- Detail View -->
+                <div class="lg:col-span-7">
+                    <div id="structure-detail" class="bg-white border border-stone-200 rounded-xl p-8 shadow-sm h-full sticky top-4">
+                        <div class="h-full flex flex-col justify-center items-center text-center text-stone-400">
+                            <span class="text-4xl mb-4">📑</span>
+                            <p>Select a document section on the left<br>to view professional guidelines.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TYPES (Functional vs Non-Functional) -->
+        <section id="types" class="hidden fade-in max-w-6xl mx-auto">
+            <header class="mb-8">
+                <h2 class="text-3xl font-bold text-stone-800">Requirement Classifications</h2>
+                <p class="mt-2 text-stone-600">
+                    Distinguishing between <em>what</em> the system does and <em>how</em> it behaves is crucial for architecture.
+                </p>
+            </header>
+
+            <!-- Toggle Controls -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-stone-200 p-1 rounded-lg inline-flex">
+                    <button onclick="toggleReqType('functional')" id="btn-func" class="btn-toggle active px-6 py-2 rounded-md text-sm font-medium">Functional</button>
+                    <button onclick="toggleReqType('non-functional')" id="btn-nonfunc" class="btn-toggle px-6 py-2 rounded-md text-sm font-medium text-stone-600 hover:text-stone-800">Non-Functional (NFRs)</button>
+                    <button onclick="toggleReqType('constraints')" id="btn-const" class="btn-toggle px-6 py-2 rounded-md text-sm font-medium text-stone-600 hover:text-stone-800">Constraints</button>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div id="req-content-area" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Dynamic Content injected via JS -->
+            </div>
+        </section>
+
+        <!-- SECTION 4: QUALITY (Audit Tool) -->
+        <section id="quality" class="hidden fade-in max-w-6xl mx-auto">
+            <header class="mb-8">
+                <h2 class="text-3xl font-bold text-stone-800">Quality Assurance</h2>
+                <p class="mt-2 text-stone-600">
+                    Not all SRS documents are created equal. Use the "SMART" criteria and IEEE characteristics to audit your specifications.
+                </p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <!-- Radar Chart -->
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                    <div class="flex justify-between mb-4">
+                        <h3 class="font-bold text-stone-700">SRS Maturity Audit</h3>
+                        <div class="space-x-2 text-xs">
+                            <span class="inline-block w-3 h-3 bg-stone-300 rounded-full"></span> <span class="text-stone-500">Draft</span>
+                            <span class="inline-block w-3 h-3 bg-orange-500 rounded-full ml-2"></span> <span class="text-stone-500">Professional</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="qualityRadar"></canvas>
+                    </div>
+                </div>
+
+                <!-- Explanation / Checklist -->
+                <div class="space-y-4">
+                    <div class="p-4 border-l-4 border-green-500 bg-white shadow-sm rounded-r-lg">
+                        <h4 class="font-bold text-stone-800">Correctness & Unambiguity</h4>
+                        <p class="text-sm text-stone-600 mt-1">Every requirement must have exactly one interpretation. Avoid words like "user-friendly," "fast," or "typically." Use metrics.</p>
+                    </div>
+                    <div class="p-4 border-l-4 border-blue-500 bg-white shadow-sm rounded-r-lg">
+                        <h4 class="font-bold text-stone-800">Completeness</h4>
+                        <p class="text-sm text-stone-600 mt-1">Include all significant requirements, responses to invalid inputs, and full labels/references for figures.</p>
+                    </div>
+                    <div class="p-4 border-l-4 border-purple-500 bg-white shadow-sm rounded-r-lg">
+                        <h4 class="font-bold text-stone-800">Verifiability (Testability)</h4>
+                        <p class="text-sm text-stone-600 mt-1">If you can't write a test case for it, it's not a requirement. "The system shall be easy to use" is invalid. "The system shall require < 3 clicks to checkout" is valid.</p>
+                    </div>
+                    <div class="p-4 border-l-4 border-orange-500 bg-white shadow-sm rounded-r-lg">
+                        <h4 class="font-bold text-stone-800">Consistency</h4>
+                        <p class="text-sm text-stone-600 mt-1">Internal logic must hold. Terminology must be consistent throughout the document.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-6 bg-stone-800 rounded-xl text-stone-300">
+                <h4 class="text-white font-bold mb-2">The "Shall" vs. "Will" Rule</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                        <span class="text-orange-400 font-bold">"Shall"</span>
+                        <p>Indicates a mandatory requirement binding the developers.</p>
+                    </div>
+                    <div>
+                        <span class="text-stone-400 font-bold">"Will"</span>
+                        <p>Indicates a statement of fact or future intent, not a requirement.</p>
+                    </div>
+                    <div>
+                        <span class="text-stone-400 font-bold">"Should"</span>
+                        <p>Indicates a goal or non-mandatory recommendation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- DATA STORE ---
+        const structureData = [
+            {
+                id: '1',
+                title: '1. Introduction',
+                desc: 'Sets the context. Includes Purpose, Scope (In/Out), Definitions, and References. Essential for stakeholder alignment.',
+                tips: ['Define acronyms early.', 'Explicitly state what the system will NOT do (negative scope).']
+            },
+            {
+                id: '2',
+                title: '2. Overall Description',
+                desc: 'High-level view. Describes User Characteristics, Product Perspective (interfaces with other systems), and Assumptions/Dependencies.',
+                tips: ['Who are the users? (Personas)', 'What hardware/OS limits exist?', 'Are we assuming internet availability?']
+            },
+            {
+                id: '3',
+                title: '3. Specific Requirements',
+                desc: 'The meat of the document. Contains detailed Functional Requirements, External Interfaces, and Performance specs.',
+                tips: ['Use unique IDs (REQ-001) for traceability.', 'Organize by Mode, User Class, or Object.']
+            },
+            {
+                id: '3.1',
+                title: '3.1 Functional Requirements',
+                desc: 'Inputs, processings, and outputs. The "logic" of the system.',
+                tips: ['Format: "The system shall [action] when [trigger]"', 'Cover edge cases and error handling.']
+            },
+            {
+                id: '3.2',
+                title: '3.2 Non-Functional (Quality)',
+                desc: 'Performance, Reliability, Availability, Security, Maintainability (PRASM).',
+                tips: ['Must be quantifiable (e.g., "Respond in < 2s")', 'Avoid vague adjectives.']
+            },
+            {
+                id: '4',
+                title: '4. Appendices',
+                desc: 'Supporting info not part of the requirements contract. Diagrams, mockups, legacy data analysis.',
+                tips: ['Wireframes usually go here or are referenced as separate artifacts.']
+            }
+        ];
+
+        const reqTypeData = {
+            'functional': {
+                title: "Functional Requirements (FRs)",
+                subtitle: "Behavioral Logic: Inputs → Processing → Outputs",
+                examples: [
+                    { code: "FR-01", text: "The system shall validate the user's email format upon registration." },
+                    { code: "FR-02", text: "The system shall generate a PDF invoice after successful payment." },
+                    { code: "FR-03", text: "The system shall allow admins to ban users for policy violations." }
+                ],
+                visualClass: "border-orange-500",
+                icon: "⚙️"
+            },
+            'non-functional': {
+                title: "Non-Functional Requirements (NFRs)",
+                subtitle: "Quality Attributes: Performance, Security, Usability",
+                examples: [
+                    { code: "NFR-01", text: "The system shall load the dashboard in < 2.0 seconds on 4G networks." },
+                    { code: "NFR-02", text: "Passwords shall be salted and hashed using SHA-256." },
+                    { code: "NFR-03", text: "The system shall support 10,000 concurrent users with no degradation." }
+                ],
+                visualClass: "border-blue-500",
+                icon: "🛡️"
+            },
+            'constraints': {
+                title: "Design Constraints",
+                subtitle: "Limitations: Regulatory, Hardware, Tech Stack",
+                examples: [
+                    { code: "CS-01", text: "The application must be hosted on AWS GovCloud to meet compliance." },
+                    { code: "CS-02", text: "The mobile app must utilize existing biometric APIs on iOS." },
+                    { code: "CS-03", text: "Total database storage costs shall not exceed $500/month." }
+                ],
+                visualClass: "border-purple-500",
+                icon: "⚠️"
+            }
+        };
+
+        // --- CHART CONFIGURATION ---
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#57534e';
+
+        function initCharts() {
+            // 1. Cost of Change Chart (Line)
+            const ctxCost = document.getElementById('costChart').getContext('2d');
+            new Chart(ctxCost, {
+                type: 'line',
+                data: {
+                    labels: ['Requirements', 'Design', 'Coding', 'Testing', 'Maintenance'],
+                    datasets: [{
+                        label: 'Relative Cost to Fix Error',
+                        data: [1, 3, 5, 15, 100],
+                        borderColor: '#ea580c', // Orange 600
+                        backgroundColor: 'rgba(234, 88, 12, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#ea580c',
+                        pointBorderWidth: 2,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `Cost Multiplier: ${context.raw}x`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Relative Cost (Multiplier)' },
+                            grid: { color: '#e7e5e4' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // 2. Bug Origin Chart (Doughnut)
+            const ctxBug = document.getElementById('bugChart').getContext('2d');
+            new Chart(ctxBug, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Requirements Phase', 'Design Phase', 'Coding Phase'],
+                    datasets: [{
+                        data: [56, 27, 17],
+                        backgroundColor: [
+                            '#ea580c', // Orange
+                            '#fca5a5', // Light Red/Pink
+                            '#d6d3d1'  // Stone
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `${context.label}: ${context.raw}% of Errors`
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // 3. Quality Radar Chart
+            const ctxRadar = document.getElementById('qualityRadar').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Correctness', 'Unambiguity', 'Completeness', 'Consistency', 'Verifiability', 'Modifiability'],
+                    datasets: [{
+                        label: 'Typical Draft',
+                        data: [60, 40, 50, 65, 30, 40],
+                        borderColor: '#a8a29e', // Stone 400
+                        backgroundColor: 'rgba(168, 162, 158, 0.2)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Professional SRS',
+                        data: [95, 90, 85, 95, 100, 90],
+                        borderColor: '#ea580c', // Orange 600
+                        backgroundColor: 'rgba(234, 88, 12, 0.2)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e7e5e4' },
+                            grid: { color: '#e7e5e4' },
+                            pointLabels: {
+                                font: { size: 11, weight: '600' }
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- INTERACTION LOGIC ---
+
+        // 1. Navigation
+        function navigateTo(sectionId) {
+            // Update Menu
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`nav-${sectionId}`).classList.add('active');
+
+            // Update View
+            document.querySelectorAll('section').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('fade-in'); // Reset animation
+            });
+            const target = document.getElementById(sectionId);
+            target.classList.remove('hidden');
+            void target.offsetWidth; // Trigger reflow for animation
+            target.classList.add('fade-in');
+        }
+
+        // 2. Structure Explorer Logic
+        function initStructureExplorer() {
+            const container = document.getElementById('structure-list');
+            
+            structureData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'structure-card bg-white p-4 rounded-lg border border-stone-200 cursor-pointer mb-3 shadow-sm hover:shadow-md';
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-semibold text-stone-700">${item.title}</span>
+                        <span class="text-stone-400">→</span>
+                    </div>
+                `;
+                card.onclick = () => showStructureDetail(item);
+                container.appendChild(card);
+            });
+        }
+
+        function showStructureDetail(item) {
+            const detailContainer = document.getElementById('structure-detail');
+            const tipsHtml = item.tips.map(t => `<li class="flex items-start"><span class="text-orange-500 mr-2">•</span>${t}</li>`).join('');
+
+            detailContainer.innerHTML = `
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-2">${item.title}</h3>
+                    <div class="h-1 w-16 bg-orange-500 rounded mb-6"></div>
+                    
+                    <h4 class="text-sm uppercase tracking-wide text-stone-400 font-bold mb-2">Purpose</h4>
+                    <p class="text-stone-700 leading-relaxed mb-6 bg-stone-50 p-4 rounded-lg border border-stone-100">${item.desc}</p>
+                    
+                    <h4 class="text-sm uppercase tracking-wide text-stone-400 font-bold mb-2">Professional Guidelines</h4>
+                    <ul class="text-stone-600 space-y-2 text-sm">
+                        ${tipsHtml}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // 3. Requirement Types Logic
+        function toggleReqType(type) {
+            // Update Buttons
+            document.querySelectorAll('.btn-toggle').forEach(btn => {
+                btn.classList.remove('active', 'text-white');
+                btn.classList.add('text-stone-600');
+            });
+            const activeBtn = document.getElementById(type === 'functional' ? 'btn-func' : type === 'non-functional' ? 'btn-nonfunc' : 'btn-const');
+            activeBtn.classList.add('active', 'text-white');
+            activeBtn.classList.remove('text-stone-600');
+
+            // Update Content
+            renderReqContent(type);
+        }
+
+        function renderReqContent(type) {
+            const data = reqTypeData[type];
+            const container = document.getElementById('req-content-area');
+            
+            // Left Card: Definition
+            const definitionHtml = `
+                <div class="bg-white p-6 rounded-xl border-t-4 ${data.visualClass} shadow-md fade-in h-full">
+                    <div class="text-4xl mb-4">${data.icon}</div>
+                    <h3 class="text-xl font-bold text-stone-800">${data.title}</h3>
+                    <p class="text-stone-500 font-medium mb-4">${data.subtitle}</p>
+                    <p class="text-sm text-stone-600 leading-relaxed">
+                        These define the core utility of the software. Without these, the system fails its primary objective.
+                        They must be clear, concise, and behavior-oriented.
+                    </p>
+                </div>
+            `;
+
+            // Right Card: Examples
+            const examplesList = data.examples.map(ex => `
+                <div class="p-3 bg-stone-50 border border-stone-200 rounded-lg flex gap-3">
+                    <span class="text-xs font-mono font-bold text-stone-400 mt-1">${ex.code}</span>
+                    <span class="text-sm text-stone-700 font-medium">"${ex.text}"</span>
+                </div>
+            `).join('');
+
+            const examplesHtml = `
+                <div class="space-y-4 fade-in">
+                    <h4 class="text-sm uppercase tracking-wide text-stone-400 font-bold">Standardized Examples</h4>
+                    ${examplesList}
+                </div>
+            `;
+
+            container.innerHTML = definitionHtml + examplesHtml;
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = () => {
+            initCharts();
+            initStructureExplorer();
+            renderReqContent('functional'); // Default view
+        };
+
+    </script>
+</body>
+</html>

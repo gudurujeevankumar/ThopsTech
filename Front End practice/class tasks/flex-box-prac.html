@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Box Class Task</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        #nav-bar{
+            width: 100%;
+            height: 50px;
+            background-color:black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav img {
+            height: 40px;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+        ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 40%;
+            margin-right: 10px;
+        }
+
+        li{
+            list-style: none;
+            color: white;
+        }
+
+        i {
+            color: white;
+        }
+
+        #parent {
+            height: 500px;
+            width: 500px;
+            border : 2px solid blue;
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        .items {
+            height: 50px;
+            width: 50px;
+            border: 1px solid black;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: grey;
+        }
+
+        .childs {
+            width:100%;
+            height:33.3%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <nav id="nav-bar" >
+        <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/5b47c6c5-6918-4b1f-a5b7-f2b4476d113c/4578dd386a030a0c2aaeef24518afb4b.png">
+
+        <ul>
+            <li><a src = "">Home</a></li>
+            <li><a src = "">About</a></li>
+            <li><a src = "">Placements</a></li>
+            <li><a src = "">Contact</a></li>
+            <i class="fa-solid fa-moon"></i>
+        </ul>
+        
+    </nav>
+
+    
+
+    <div id="parent">
+        <div id="child-1" class="childs">
+            <div id="item-1" class="items">A</div>
+            <div id="item-2" class="items">B</div>
+            <div id="item-3" class="items">C</div>
+        </div>
+        <div id="child-2" class="childs">
+            <div id="item-4" class="items">D</div>
+            <div id="item-5" class="items">E</div>
+            <div id="item-6" class="items">F</div>
+        </div>
+        <div id="child-3" class="childs">
+            <div id="item-7" class="items">G</div>
+            <div id="item-8" class="items">H</div>
+            <div id="item-9" class="items">J</div>
+        </div>
+    </div>
+</body>
+</html>

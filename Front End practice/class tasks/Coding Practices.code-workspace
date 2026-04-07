@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../Desktop/Coding Practices"
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			"."
+		],
+		"java.project.referencedLibraries": []
+	}
+}

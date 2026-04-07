@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../AI & ML"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Bite_N_Burn",
+		"editor.tokenColorCustomizations": {
+			"comments": "",
+			"textMateRules": []
+		}
+	}
+}

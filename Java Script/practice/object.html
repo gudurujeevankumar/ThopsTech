@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>object</title>
+</head>
+
+<body>
+
+    <script>
+        let obj = {
+            id: 101,
+            name: "James",
+            age: 10,
+        }
+
+        console.log(obj)
+
+        console.log(obj["name"])
+
+        obj["place"] = "BLGR"
+        console.log(obj)
+
+        delete obj["id"]
+        console.log(obj)
+
+
+        const users = ["Jeeva", "Ram", "Krishna"];
+
+        users.forEach(user => {
+            document.body.innerHTML += `<h1>${user}</h1>`;
+        });
+
+    </script>
+</body>
+
+</html>

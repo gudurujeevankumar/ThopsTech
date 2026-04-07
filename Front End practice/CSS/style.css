@@ -1,0 +1,21 @@
+input {
+    color:rgb(43, 226, 52);
+    font-size:20px;
+    border:2px solid black; 
+    border-radius:10px;
+}
+label {
+    font-weight:bold;
+    font-size:18px;
+    color:deeppink
+}
+h3{
+    color:rgb(255, 0, 0);
+
+}
+li{
+    font-style: oblique;
+}
+section{
+    background-color: cyan;
+}

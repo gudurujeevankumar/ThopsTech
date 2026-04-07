@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup form</title>
+    <style>
+        * {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: lighter;
+        }
+        #signup {
+            background-color: rgb(55, 57, 52);
+            color: white;
+            width: 350px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+        input {
+            background-color: rgb(55, 57, 52);
+            width: 300px;
+            padding: 10px;
+            border: solid rgba(255, 255, 255, 0.553);
+            border-radius: 4px;
+        }
+
+        button {
+            width: 300px;
+            padding: 9px;
+            background-color: rgb(213, 226, 121);
+        }
+
+        ::placeholder {
+            color: white;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <form id="signup">
+        <h1>Signup</h1>
+        <input type="text" placeholder="Name">
+        <input type="text" placeholder="Username">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <input type="password" placeholder="Confirm password">
+        <button>Signup</button>
+    </form>
+</body>
+</html>

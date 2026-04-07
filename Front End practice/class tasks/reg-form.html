@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-color: rgb(68, 115, 235);
+            display: flex;
+            height: 800px;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        #form-card {
+            background-color: white;
+            height: 580px;
+            width: 700px;
+            margin: auto;
+            border-radius: 10px;
+            padding: 0px 30px;
+            /* display: flex;
+            flex-direction: column;
+            justify-content: space-around; */
+        }
+
+        label {
+            font-size: 15px;
+            font-weight: 450;
+        }
+
+        #p-d {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .form-al {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            margin-top: 10px;
+            height: 20px;
+            width: 200px;
+            padding: 10px 10px;
+            border: 2px solid rgba(128, 128, 128, 0.361);
+            border-radius: 2px;
+            font-weight: 550;
+        }
+
+        button {
+            height: 40px;
+            width: 220px;
+            color: white;
+            background-color: rgb(68, 115, 235);
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: 500;
+            border: none;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: rgb(58, 57, 57);
+            font-weight: 600; 
+            font-size: 25px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 20px;
+            color: gray;
+            font-weight: 600;
+            
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <form id="form-card">
+        <h1>Registration</h1>
+        <h2>Personal Details</h2>
+        <div class="content">
+            <div id="p-d">
+                <div class="form-al">
+                    <label for="Full Name">Full name</label>
+                    <input name="" type="text" placeholder="Enter your name">
+                </div>
+                <div class="form-al">
+                    <label for="DOB">Date of Birth</label>
+                    <input name="DOB" type="text" placeholder="Enter birth date">
+                </div>
+                <div class="form-al">
+                    <label for="email">Email</label>
+                    <input name="email" type="email" placeholder="Enter your email">
+                </div>
+            </div>
+            <div id="p-d">
+                <div class="form-al">
+                    <label for="number">Mobile number</label>
+                    <input name="number" type="text" placeholder="Enter mobile number">
+                </div>
+
+                <div class="form-al">
+                    <label for="gender">Gender</label>
+                    <input name="gender" type="text" placeholder="Enter your gender">
+                </div>
+
+                <div class="form-al">
+                    <label for="occupation">Occupation</label>
+                    <input name="occupation" type="text" placeholder="Enter occupation">
+                </div>
+            </div>
+            <h2>Identity Details</h2>
+            <div id="p-d">
+                <div class="form-al">
+                    <label for="id-type">ID Type</label>
+                    <input name="id-type" type="text" placeholder="Enter ID type">
+                </div>
+
+                <div class="form-al">
+                    <label for="id-num">ID Number</label>
+                    <input name="id-num" type="text" placeholder="Enter ID number">
+                </div>
+
+                <div class="form-al">
+                    <label for="issue-auth">Issue Authority</label>
+                    <input name="issue-auth" type="text" placeholder="Enter issue department">
+                </div>
+            </div>
+            <div id="p-d">
+                <div class="form-al">
+                    <label for="issue-date">Issue Date</label>
+                    <input name="issue-date" type="text" placeholder="Enter ID issue date">
+                </div>
+
+                <div class="form-al">
+                    <label for="issue-state">Issue State</label>
+                    <input name="issue-state" type="text" placeholder="Enter ID issue state">
+                </div>
+
+                <div class="form-al">
+                    <label for="expiry-date">Expiry Date</label>
+                    <input name="expiry-date" DOB type="text" placeholder="Enter ID expiry date">
+                </div>
+            </div>
+        </div>
+        <button type="submit"> Next <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+</body>
+
+</html>

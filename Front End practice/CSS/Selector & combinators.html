@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* 1. Style All Paragraphs
+        Use the type selector p to:
+            Set a common font-family and line-height
+            Change the color
+            Add margin-bottom for spacing */
+        p {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* 2. Style Elements by Class
+                Create multiple elements with the same class:
+                    Use .highlight to change background-color
+                    Add padding and border
+                    Apply bold text  */
+        .jeeva {
+            background-color: antiquewhite;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        /* 3. Style an ID-Specific Section
+            Create a unique section with an ID:
+                Use #main-content to apply custom font, font-size, and color
+                Add border and padding
+                Use text-align: center */
+
+        #main-content {
+            font-family: Impact;
+            padding: 10px;
+            text-align: center;
+        }
+        
+    </style>
+    <title> Selectors & Combinators</title>
+</head>
+<body>
+
+    <h1> 1. Style All Paragraphs </h1>
+    <!-- 1. Style All Paragraphs
+        Use the type selector p to:
+            Set a common font-family and line-height
+            Change the color
+            Add margin-bottom for spacing -->
+
+    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt odit nesciunt maxime suscipit vel dolores expedita laudantium quis. Ad doloremque maxime dignissimos enim eaque assumenda.</p>
+
+    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque culpa dolorum quos, maiores ut saepe quibusdam est nisi exercitationem assumenda neque sunt, natus molestias, impedit repudiandae nesciunt esse. Temporibus, quis! </p>
+
+
+    <h1> 2. Style Elements by Class </h1>
+
+    <!-- 2. Style Elements by Class
+                Create multiple elements with the same class:
+                    Use .highlight to change background-color
+                    Add padding and border
+                    Apply bold text -->
+
+    <h2 class = "jeeva" > H2 Class name jeeva </h2>
+    <p class = "jeeva"> Paragraph with Class name jeeva</p>
+    <p class = "jeeva"> Lorem text with class name jeeva - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo blanditiis, consequuntur quae hic eveniet rem dignissimos maxime asperiores ipsam odit sint? Accusamus accusantium amet quibusdam ratione? Perferendis quas incidunt rem.</p>
+
+    <h1> 3. Style an ID-Specific Section </h1>
+        <!-- 3. Style an ID-Specific Section
+            Create a unique section with an ID:
+                Use #main-content to apply custom font, font-size, and color
+                Add border and padding
+                Use text-align: center -->
+
+    <h3 id="main-content"> Use #main-content to apply custom font, font-size, and color, Add border and padding, Use text-align: center </h3>
+
+    <h1> 4. Style Links Inside a Footer </h1>
+        <!-- Use descendant combinator:
+            footer a to style all links in the footer
+            Remove underline, change color, and add hover effect
+            Set font-weight to bold -->
+
+    <div class="parent">
+        <h1 class="child"> Child-1 </h1>
+        <h1 class="child">Child-2</h1>
+        <h1 class="child">Child-3</h1>
+        <h1 class="child">Child-4</h1>
+    </div>
+</body>
+</html>
